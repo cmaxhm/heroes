@@ -448,9 +448,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var SearchComponent = /** @class */ (function () {
-    function SearchComponent(activatedRoute, heroesService) {
+    function SearchComponent(activatedRoute, heroesService, router) {
         this.activatedRoute = activatedRoute;
         this.heroesService = heroesService;
+        this.router = router;
         this.heroes = [];
     }
     SearchComponent.prototype.ngOnInit = function () {
@@ -459,13 +460,17 @@ var SearchComponent = /** @class */ (function () {
             _this.heroes = _this.heroesService.searchHeroes(params.text);
         });
     };
+    SearchComponent.prototype.showHero = function (id) {
+        this.router.navigate(['/hero', id]);
+    };
     SearchComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-search',
             template: __webpack_require__(/*! ./search.component.html */ "./src/app/components/search/search.component.html")
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"]])
+            _services_heroes_service__WEBPACK_IMPORTED_MODULE_1__["HeroesService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], SearchComponent);
     return SearchComponent;
 }());
