@@ -418,7 +418,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Búsqueda de héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <div class=\"card animated fadeIn fast\" *ngFor=\"let heroe of heroes; let i = index\">\n    <img class=\"card-img-top\" [src]=\"heroe.img\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{ heroe.nombre }}</h5>\n      <p class=\"card-text\">{{ heroe.bio }}</p>\n      <p class=\"card-text\"><small class=\"text-muted\">{{ heroe.aparicion }}</small></p>\n      <!--<a [routerLink]=\"['/heroe', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n      <button (click)=\"showHero(i)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"heroes.length == 0\" class=\"alert alert-warning\" role=\"alert\">\n  No se encontró nada por el término de búsqueda.\n</div>"
+module.exports = "<h1>Búsqueda de héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <div class=\"card animated fadeIn fast\" *ngFor=\"let heroe of heroes; let i = index\">\n    <img class=\"card-img-top\" [src]=\"heroe.img\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{ heroe.nombre }}</h5>\n      <p class=\"card-text\">{{ heroe.bio }}</p>\n      <p class=\"card-text\"><small class=\"text-muted\">{{ heroe.aparicion }}</small></p>\n      <!--<a [routerLink]=\"['/heroe', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n      <button (click)=\"showHero(heroe.nombre)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"heroes.length == 0\" class=\"alert alert-warning\" role=\"alert\">\n  No se encontró nada por el término de búsqueda.\n</div>"
 
 /***/ }),
 
@@ -460,7 +460,8 @@ var SearchComponent = /** @class */ (function () {
             _this.heroes = _this.heroesService.searchHeroes(params.text);
         });
     };
-    SearchComponent.prototype.showHero = function (id) {
+    SearchComponent.prototype.showHero = function (name) {
+        var id = this.heroesService.heroes.findIndex(function (index) { return index.nombre == name; });
         this.router.navigate(['/hero', id]);
     };
     SearchComponent = __decorate([
@@ -518,8 +519,8 @@ var NavbarComponent = /** @class */ (function () {
         this.router = router;
     }
     NavbarComponent.prototype.ngOnInit = function () { };
-    NavbarComponent.prototype.searchHero = function (text) {
-        this.router.navigate(['/search', text]);
+    NavbarComponent.prototype.searchHero = function (name) {
+        this.router.navigate(['/search', name]);
     };
     NavbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
