@@ -102,12 +102,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_heroes_heroes_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/heroes/heroes.component */ "./src/app/components/heroes/heroes.component.ts");
 /* harmony import */ var _components_hero_hero_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/hero/hero.component */ "./src/app/components/hero/hero.component.ts");
 /* harmony import */ var _components_search_search_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/search/search.component */ "./src/app/components/search/search.component.ts");
+/* harmony import */ var _components_card_card_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/card/card.component */ "./src/app/components/card/card.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -131,7 +133,8 @@ var AppModule = /** @class */ (function () {
                 _components_about_about_component__WEBPACK_IMPORTED_MODULE_7__["AboutComponent"],
                 _components_heroes_heroes_component__WEBPACK_IMPORTED_MODULE_8__["HeroesComponent"],
                 _components_hero_hero_component__WEBPACK_IMPORTED_MODULE_9__["HeroComponent"],
-                _components_search_search_component__WEBPACK_IMPORTED_MODULE_10__["SearchComponent"]
+                _components_search_search_component__WEBPACK_IMPORTED_MODULE_10__["SearchComponent"],
+                _components_card_card_component__WEBPACK_IMPORTED_MODULE_11__["CardComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -236,6 +239,72 @@ var AboutComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/card/card.component.html":
+/*!*****************************************************!*\
+  !*** ./src/app/components/card/card.component.html ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"card animated fadeIn fast\">\n  <img class=\"card-img-top\" [src]=\"hero.img\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">{{ hero.nombre}}</h5>\n    <p class=\"card-text\">{{ hero.bio }}</p>\n    <p class=\"card-text\"><small class=\"text-muted\">{{ hero.aparicion }}</small></p>\n    <!--<a [routerLink]=\"['/hero', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n    <button (click)=\"showHero(i)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/card/card.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/components/card/card.component.ts ***!
+  \***************************************************/
+/*! exports provided: CardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CardComponent", function() { return CardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CardComponent = /** @class */ (function () {
+    function CardComponent(router) {
+        this.router = router;
+        this.hero = {};
+    }
+    CardComponent.prototype.ngOnInit = function () {
+    };
+    CardComponent.prototype.showHero = function (id) {
+        this.router.navigate(['/hero', id]);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CardComponent.prototype, "hero", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], CardComponent.prototype, "i", void 0);
+    CardComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-card',
+            template: __webpack_require__(/*! ./card.component.html */ "./src/app/components/card/card.component.html")
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], CardComponent);
+    return CardComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/hero/hero.component.html":
 /*!*****************************************************!*\
   !*** ./src/app/components/hero/hero.component.html ***!
@@ -304,7 +373,7 @@ var HeroComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <div class=\"card animated fadeIn fast\" *ngFor=\"let heroe of heroes; let i = index\">\n    <img class=\"card-img-top\" [src]=\"heroe.img\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{ heroe.nombre}}</h5>\n      <p class=\"card-text\">{{ heroe.bio }}</p>\n      <p class=\"card-text\"><small class=\"text-muted\">{{ heroe.aparicion }}</small></p>\n      <!--<a [routerLink]=\"['/heroe', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n      <button (click)=\"showHero(i)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n    </div>\n  </div>\n</div>"
+module.exports = "<h1>Héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <app-card [hero]=\"hero\" [i]=\"i\" *ngFor=\"let hero of heroes; let i = index\"></app-card>\n</div>"
 
 /***/ }),
 
