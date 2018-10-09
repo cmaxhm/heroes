@@ -246,7 +246,7 @@ var AboutComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card animated fadeIn fast\">\n  <img class=\"card-img-top\" [src]=\"hero.img\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">{{ hero.nombre}}</h5>\n    <p class=\"card-text\">{{ hero.bio }}</p>\n    <p class=\"card-text\"><small class=\"text-muted\">{{ hero.aparicion }}</small></p>\n    <!--<a [routerLink]=\"['/hero', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n    <button (click)=\"showHero(i)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n  </div>\n</div>"
+module.exports = "<div class=\"card animated fadeIn fast\">\n  <img class=\"card-img-top\" [src]=\"hero.img\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">{{ hero.nombre}}</h5>\n    <p class=\"card-text\">{{ hero.bio }}</p>\n    <p class=\"card-text\"><small class=\"text-muted\">{{ hero.aparicion }}</small></p>\n    <button (click)=\"showHero(i)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -277,11 +277,13 @@ var CardComponent = /** @class */ (function () {
     function CardComponent(router) {
         this.router = router;
         this.hero = {};
+        this.selectedHero = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     CardComponent.prototype.ngOnInit = function () {
     };
-    CardComponent.prototype.showHero = function (id) {
-        this.router.navigate(['/hero', id]);
+    CardComponent.prototype.showHero = function () {
+        // this.router.navigate(['/hero', id]);
+        this.selectedHero.emit(this.i);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -291,6 +293,10 @@ var CardComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Number)
     ], CardComponent.prototype, "i", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
+    ], CardComponent.prototype, "selectedHero", void 0);
     CardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-card',
@@ -373,7 +379,7 @@ var HeroComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <app-card [hero]=\"hero\" [i]=\"i\" *ngFor=\"let hero of heroes; let i = index\"></app-card>\n</div>"
+module.exports = "<h1>Héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <app-card (selectedHero)=\"showHero($event)\" [hero]=\"hero\" [i]=\"i\" *ngFor=\"let hero of heroes; let i = index\"></app-card>\n</div>"
 
 /***/ }),
 
@@ -487,7 +493,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Búsqueda de héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <div class=\"card animated fadeIn fast\" *ngFor=\"let heroe of heroes; let i = index\">\n    <img class=\"card-img-top\" [src]=\"heroe.img\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{ heroe.nombre }}</h5>\n      <p class=\"card-text\">{{ heroe.bio }}</p>\n      <p class=\"card-text\"><small class=\"text-muted\">{{ heroe.aparicion }}</small></p>\n      <!--<a [routerLink]=\"['/heroe', i]\" class=\"btn btn-primary btn-block\">Ver más</a>-->\n      <button (click)=\"showHero(heroe.nombre)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"heroes.length == 0\" class=\"alert alert-warning\" role=\"alert\">\n  No se encontró nada por el término de búsqueda.\n</div>"
+module.exports = "<h1>Búsqueda de héroes</h1>\n<hr>\n<div class=\"card-columns\">\n  <div class=\"card animated fadeIn fast\" *ngFor=\"let hero of heroes; let i = index\">\n    <img class=\"card-img-top\" [src]=\"hero.img\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{ hero.nombre }}</h5>\n      <p class=\"card-text\">{{ hero.bio }}</p>\n      <p class=\"card-text\"><small class=\"text-muted\">{{ hero.aparicion }}</small></p>\n      <button (click)=\"showHero(hero.nombre)\" type=\"submit\" class=\"btn btn-primary btn-block\">Ver más</button>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"heroes.length == 0\" class=\"alert alert-warning\" role=\"alert\">\n  No se encontró nada por el término de búsqueda.\n</div>"
 
 /***/ }),
 
